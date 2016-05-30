@@ -23,9 +23,11 @@ namespace Atomia.Store.Themes.Default
                     "~/Themes/Default/Scripts/atomia/atomia.utils.eventhandlers.js",
                     "~/Themes/Default/Scripts/atomia/atomia.api.definitions.js",
                     "~/Themes/Default/Scripts/atomia/atomia.api.cart.js",
+                    "~/Themes/Default/Scripts/atomia/atomia.api.checkout.js",
                     "~/Themes/Default/Scripts/atomia/atomia.api.domains.js",
                     "~/Themes/Default/Scripts/atomia/atomia.ko.submitvalid-binding.js",
                     "~/Themes/Default/Scripts/atomia/atomia.ko.slidevisible-binding.js",
+                    "~/Themes/Default/Scripts/atomia/atomia.ko.vpsslider-binding.js",
                     "~/Themes/Default/Scripts/atomia/atomia.viewmodels.modalmixin.js",
                     "~/Themes/Default/Scripts/atomia/atomia.viewmodels.productmixin.js",
                     "~/Themes/Default/Scripts/atomia/atomia.viewmodels.notification.js",
@@ -42,7 +44,9 @@ namespace Atomia.Store.Themes.Default
                     "~/Themes/Default/Scripts/atomia/atomia.viewmodels.whois.js",
                     "~/Themes/Default/Scripts/atomia/atomia.viewmodels.paymentselector.js",
                     "~/Themes/Default/Scripts/atomia/atomia.viewmodels.paywithinvoice.js",
-                    "~/Themes/Default/Scripts/atomia/atomia.viewmodels.paymentprofile.js");
+                    "~/Themes/Default/Scripts/atomia/atomia.viewmodels.paymentprofile.js",
+                    "~/Themes/Default/Scripts/atomia/atomia.viewmodels.vatvalidation.js",
+                    "~/Themes/Default/Scripts/atomia/atomia.viewmodels.vpscalculator.js");
 
             var styleBundle = new StyleBundle(DEFAULT_STYLES_BUNDLE)
                 .Include(

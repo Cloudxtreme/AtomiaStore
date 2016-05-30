@@ -69,14 +69,14 @@
 
         Atomia.VM.notification = new Atomia.ViewModels.NotificationModel();
 
-        Atomia.Utils.warnAjaxErrors('@Html.CommonResource("AjaxErrorTitle")', '@Html.CommonResource("AjaxErrorMessage")');
+        Atomia.Utils.warnAjaxErrors('@Html.Raw(@Html.CommonResource("AjaxErrorTitle"))', '@Html.Raw(@Html.CommonResource("AjaxErrorMessage"))');
         Atomia.Utils.relayCartUpdateToValidation();
     </script>
     
     @RenderSection("scripts", required: false)
 
     <script type="text/javascript">
-        AtomiaValidation.init('AtomiaRequired', 'AtomiaRegularExpression', 'AtomiaUsername');
+        AtomiaValidation.init('AtomiaRequired', 'AtomiaRegularExpression', 'AtomiaUsername', 'AtomiaUsernameRequired');
 
         ko.applyBindings(Atomia.VM);
     </script>

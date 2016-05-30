@@ -3,11 +3,11 @@
 <table class="list display strong" id="product_list">
     <thead>
         <tr>
-            <th class="ta_left" scope="col">@Html.CommonResource("Product")</th>
-            <th scope="col">@Html.CommonResource("Period")</th>
+            <th class="left" scope="col">@Html.CommonResource("Product")</th>
+            <th class="right" scope="col">@Html.CommonResource("Period")</th>
             <th class="right" scope="col" style="width: 15%;">@Html.CommonResource("Fee")</th>
             <th class="right" scope="col" style="width: 15%;">@Html.CommonResource("Discount")</th>
-            <th class="right" scope="col" style="width: 15%;">@Html.CommonResource("Subtotal")</th>
+            <th class="right" scope="col" style="width: 15%;">@Html.CommonResource("Amount")</th>
         </tr>
     </thead>
     <tfoot>
@@ -39,8 +39,7 @@
                 <strong data-bind="text: name"></strong>
                 <br />
                 <span class="fine-print">
-                    <span data-bind="text: category"></span>
-                    <span data-bind="visible: !isDomainItem() && attrs.domainName, text: ', ' + attrs.domainName"></span>
+                    <span data-bind="text: categoryDescription"></span><span data-bind="visible: !isDomainItem() && attrs.domainName, text: ', ' + attrs.domainName"></span>
                 </span>
             </td>
             <td class="right">

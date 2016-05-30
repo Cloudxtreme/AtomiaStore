@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Atomia.Store.PublicBillingApi</RootNamespace>
     <AssemblyName>Atomia.Store.PublicBillingApi</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,12 +58,17 @@
     <Reference Include="Atomia.Web.Plugin.ProductsProvider">
       <HintPath>..\Lib\Atomia.Web.Plugin.ProductsProvider.dll</HintPath>
     </Reference>
+    <Reference Include="Atomia.Web.Plugin.ServiceReferences, Version=14.1.5549.28107, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Atomia.Web.Plugin.ServiceReferences.dll</HintPath>
+    </Reference>
     <Reference Include="idnlib">
       <HintPath>..\Lib\idnlib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
@@ -71,6 +77,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\CachedCountryProvider.cs" />
+    <Compile Include="Adapters\CachedVatNumberValidator.cs" />
     <Compile Include="Adapters\CartPricingProvider.cs" />
     <Compile Include="Adapters\CategoryProductsProvider.cs" />
     <Compile Include="Adapters\CountryProvider.cs" />
@@ -83,6 +91,8 @@
     <Compile Include="Adapters\ResellerProvider.cs" />
     <Compile Include="Adapters\SetupFeeCartPricingProvider.cs" />
     <Compile Include="Adapters\TermsOfServiceProvider.cs" />
+    <Compile Include="Adapters\VatDisplayPreferenceProvider.cs" />
+    <Compile Include="Adapters\VatNumberValidator.cs" />
     <Compile Include="ApiProductsProvider.cs" />
     <Compile Include="CachedResellerDataProvider.cs" />
     <Compile Include="Handlers\TransactionDataHandler.cs" />
@@ -91,6 +101,7 @@
     <Compile Include="Handlers\PaymentDataHandler.cs" />
     <Compile Include="OrderCreator.cs" />
     <Compile Include="PaymentTransactionCreator.cs" />
+    <Compile Include="PriceCalculator.cs" />
     <Compile Include="ShopNameProvider.cs" />
     <Compile Include="ProductMapper.cs" />
     <Compile Include="PublicBillingApiClient.cs" />

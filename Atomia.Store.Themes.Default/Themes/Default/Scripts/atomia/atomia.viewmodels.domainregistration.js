@@ -19,8 +19,9 @@ Atomia.ViewModels = Atomia.ViewModels || {};
         self.isPrimary = self.attrs.premium === 'true';
         self.uniqueId = _.uniqueId('dmn');
         self.domainNameSld = domainParts[0];
-        self.domainNameTld = domainParts[1];
+        self.domainNameTld = domainParts.slice(1).join('.');
         self.status = domainItemData.Status;
+        self.order = domainItemData.Order;
 
         /** 
          * Overrides ProductMixin property.
@@ -50,6 +51,7 @@ Atomia.ViewModels = Atomia.ViewModels || {};
         self.primaryResults = ko.observableArray().extend({ rateLimit: 50 });
         self.secondaryResults = ko.observableArray().extend({ rateLimit: 50 });
         self.noResults = ko.observable(false);
+        self.searchFinished = ko.observable(false);
 
         self.hasResults = ko.pureComputed(function () {
             return self.primaryResults().length > 0 || self.secondaryResults().length > 0;
@@ -67,9 +69,11 @@ Atomia.ViewModels = Atomia.ViewModels || {};
             self.showMoreResults(false);
             self.submittedQuery(self.query());
             self.noResults(false);
+            self.searchFinished(false);
             
             domainsApi.findDomains(self.query(), function (data) {
                 var domainSearchId = data.DomainSearchId;
+                self.searchFinished(data.FinishSearch);
 
                 if (data.Results.length === 0 && data.FinishSearch) {
                     self.noResults(true);
@@ -79,8 +83,12 @@ Atomia.ViewModels = Atomia.ViewModels || {};
                     self.updateResults(data.Results);
                 }
                 else {
+                    self.updateResults(data.Results);
+
                     domainsApi.checkStatus(domainSearchId,
                         function (data) {
+                            self.searchFinished(data.FinishSearch);
+
                             if (data.Results.length === 0 && data.FinishSearch) {
                                 self.noResults(true);
                                 self.isLoadingResults(false);
@@ -95,7 +103,7 @@ Atomia.ViewModels = Atomia.ViewModels || {};
         
         /** Primary TLD search results have finished loading. */
         self.primaryResultsAreFinished = function primaryResultsAreFinished() {
-            if (self.primaryResults().length === 0) {
+            if (self.primaryResults().length === 0 && !self.searchFinished()) {
                 return false;
             }
 
@@ -112,13 +120,27 @@ Atomia.ViewModels = Atomia.ViewModels || {};
             _.each(results, function (result) {
                 var item = self.createDomainRegistrationItem(result);
 
+                // Put any specifically searched tld on top.
+                if (item.attrs.domainName === self.query()) {
+                    item.order = -1;
+                }
+
                 if (item.isPrimary) {
+                    self.primaryResults.remove(function (r) {
+                        return r.articleNumber === item.articleNumber;
+                    });
                     self.primaryResults.push(item);
                 }
                 else {
+                    self.secondaryResults.remove(function (r) {
+                        return r.articleNumber === item.articleNumber;
+                    });
                     self.secondaryResults.push(item);
                 }
             });
+
+            self.primaryResults.sort(self.domainSortOrder);
+            self.secondaryResults.sort(self.domainSortOrder);
 
             if (self.primaryResultsAreFinished()) {
                 self.isLoadingResults(false);
@@ -140,12 +162,26 @@ Atomia.ViewModels = Atomia.ViewModels || {};
             if (item.isPrimary && item.status === 'available') {
                 return 'domainregistration-primary-available';
             }
+            else if (item.isPrimary && item.status === 'loading') {
+                return 'domainregistration-primary-loading';
+            }
             else if (item.isPrimary) {
                 return 'domainregistration-primary-taken';
             }
             else {
                 return 'domainregistration-secondary-' + item.status;
             }
+        };
+
+        self.domainSortOrder = function domainSortOrder(leftItem, rightItem) {
+            if (leftItem.order === rightItem.order) {
+                return 0
+            }
+            else if (leftItem.order < rightItem.order) {
+                return -1;
+            }
+
+            return 1;
         };
     }
 

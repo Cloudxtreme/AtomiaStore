@@ -12,7 +12,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Atomia.Store.Themes.Default</RootNamespace>
     <AssemblyName>Atomia.Store.Themes.Default</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -39,6 +39,10 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -85,6 +89,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Atomia.Web.Plugin.Validation.dll</HintPath>
     </Reference>
+    <Reference Include="MarkdownSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Solution\packages\MarkdownSharp.1.13.0.0\lib\35\MarkdownSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -100,6 +108,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.WebRequest" />
@@ -107,8 +116,7 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Solution\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -136,9 +144,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Solution\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -149,6 +155,7 @@
       <Private>True</Private>
       <HintPath>..\Solution\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="Unity.Mvc5, Version=1.1.0.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Unity.Mvc5.dll</HintPath>
@@ -158,6 +165,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\DefaultCampaignPricingProvider.cs" />
+    <Compile Include="Adapters\MarkdownItemPresenter.cs" />
     <Compile Include="Adapters\OrderFlowValidator.cs" />
     <Compile Include="Adapters\PremiumDomainsProvider.cs" />
     <Compile Include="App_GlobalResources\Common.designer.cs">
@@ -165,10 +174,20 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="App_GlobalResources\Common.sv-SE.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Common.sv-SE.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\CustomerValidation.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CustomerValidation.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\CustomerValidation.sv-SE.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerValidation.sv-SE.resx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\OrderFlowConfig.cs" />
@@ -200,6 +219,7 @@
     <Content Include="Original Files\App_Data\atomiaRegularExpressionConfig.config" />
     <Content Include="Original Files\Web.config" />
     <Content Include=".jshintrc" />
+    <Content Include="Original Files\bin\Atomia.Common.dll.config" />
     <None Include="Original Files\bin\Atomia.Web.Plugin.DomainSearch.dll.config" />
     <None Include="Original Files\bin\Atomia.Web.Plugin.OrderServiceReferences.dll.config" />
     <None Include="Original Files\bin\Atomia.Web.Plugin.Validation.dll.config" />
@@ -231,12 +251,17 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Themes\Default\Content\img\atomia_2\mail.svg" />
+    <Content Include="Themes\Default\Scripts\atomia\atomia.api.checkout.js" />
+    <Content Include="Themes\Default\Scripts\atomia\atomia.ko.vpsslider-binding.js" />
     <Content Include="Themes\Default\Scripts\atomia\atomia.utils.eventhandlers.js" />
     <Content Include="Themes\Default\Scripts\atomia\atomia.viewmodels.campaign.js" />
     <Content Include="Themes\Default\Scripts\atomia\atomia.viewmodels.paymentprofile.js" />
     <Content Include="Themes\Default\Scripts\atomia\atomia.viewmodels.modalmixin.js" />
     <Content Include="Themes\Default\Scripts\atomia\atomia.viewmodels.notification.js" />
+    <Content Include="Themes\Default\Scripts\atomia\atomia.viewmodels.vpscalculator.js" />
     <Content Include="Themes\Default\Scripts\atomia\atomia.viewmodels.productmixin.js" />
+    <Content Include="Themes\Default\Scripts\atomia\atomia.viewmodels.vatvalidation.js" />
     <Content Include="Themes\Default\Scripts\atomia\atomia.viewmodels.whois.js" />
     <Content Include="Themes\Default\Views\Checkout\Success.cshtml" />
     <Content Include="Themes\Default\Views\Checkout\Failure.cshtml" />
@@ -425,7 +450,18 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Common.sv-SE.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Common.sv-SE.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\CustomerValidation.sv-SE.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>CustomerValidation.sv-SE.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -452,9 +488,10 @@
   <PropertyGroup>
     <PostBuildEvent>xcopy /y "$(SolutionDir)..\Lib\Atomia.Web.Plugin.OrderServiceReferences.dll.config" "$(SolutionDir)..\Atomia.Store.Themes.Default\bin"
 xcopy /y "$(SolutionDir)..\Lib\Atomia.Web.Plugin.Validation.dll.config" "$(SolutionDir)..\Atomia.Store.Themes.Default\bin"
-xcopy /y "$(SolutionDir)..\Lib\Atomia.Web.Plugin.DomainSearch.dll.config" "$(SolutionDir)..\Atomia.Store.Themes.Default\bin"</PostBuildEvent>
+xcopy /y "$(SolutionDir)..\Lib\Atomia.Web.Plugin.DomainSearch.dll.config" "$(SolutionDir)..\Atomia.Store.Themes.Default\bin"
+xcopy /y "$(SolutionDir)..\Lib\Atomia.Common.dll.config" "$(SolutionDir)..\Atomia.Store.Themes.Default\bin"</PostBuildEvent>
   </PropertyGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v12.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets" />
   <Target Condition="'$(Configuration)' == 'Release'" Name="AfterBuild">
     <Message Text="##############After build##################$(OutputFolder)" Importance="high" />
     <Exec Command="..\Setup\PostPublish.bat $(Configuration)" ContinueOnError="true" />

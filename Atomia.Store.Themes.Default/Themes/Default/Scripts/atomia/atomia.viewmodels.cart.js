@@ -9,8 +9,24 @@ Atomia.ViewModels = Atomia.ViewModels || {};
     function toCartApiData(cart) {
         var apiCart = {
             CampaignCode: cart.campaignCode(),
-            CartItems: []
+            CartItems: [],
+            CustomAttributes: []
         };
+
+        _.each(cart.attrs(), function (attr) {
+            var name,
+                value = attr.value,
+                key = attr.name;
+
+            if (value != null) {
+                name = cart._origAttrNames[key] || key[0].toUpperCase() + key.slice(1);
+
+                apiCart.CustomAttributes.push({
+                    Name: name,
+                    Value: value
+                });
+            }
+        });
 
         _.each(cart.cartItems(), function (cartItem) {
             var apiItem = {
@@ -53,7 +69,7 @@ Atomia.ViewModels = Atomia.ViewModels || {};
 
     /** Update 'cart' with 'cartData'. */
     function updateCart(cart, cartData) {
-        var cartItems = [], cartTaxes = [];
+        var cartItems = [], cartTaxes = [], cartAttrs = [];
 
         _.each(cartData.CartItems, function (cartItemData) {
             var item, cartItem;
@@ -61,7 +77,8 @@ Atomia.ViewModels = Atomia.ViewModels || {};
                 articleNumber: cartItemData.ArticleNumber,
                 name: cartItemData.Name,
                 description: cartItemData.Description,
-                category: cartItemData.Category,
+                categories: _.pluck(cartItemData.Categories, 'Name'),
+                categoryDescription: _.pluck(cartItemData.Categories, 'Description').join(', '),
                 quantity: cartItemData.Quantity,
                 price: cartItemData.Price,
                 taxes: [],
@@ -113,6 +130,16 @@ Atomia.ViewModels = Atomia.ViewModels || {};
             });
         });
 
+        _.each(cartData.CustomAttributes, function (attr) {
+            var name = attr.Name[0].toLowerCase() + attr.Name.slice(1);
+
+            cartAttrs.push({name: name, value: attr.Value});
+
+            // Save the attribute name with original casing, to be able to send it back to api that way.
+            cart._origAttrNames[name] = attr.Name;
+        });
+
+        cart.attrs(cartAttrs);
         cart.cartItems(cartItems);
         cart.subTotal(cartData.SubTotal);
         cart.total(cartData.Total);
@@ -172,6 +199,8 @@ Atomia.ViewModels = Atomia.ViewModels || {};
         self.total = ko.observable(0);
         self.taxes = ko.observableArray();
         self.campaignCode = ko.observable('');
+        self.attrs = ko.observableArray();
+        self._origAttrNames = {};
         
         self.numberOfItems = ko.pureComputed(function numberOfItems() {
             return self.cartItems().length;
@@ -188,7 +217,9 @@ Atomia.ViewModels = Atomia.ViewModels || {};
         /** Items in cart that are domain items, like registration or transfer */
         self.domainItems = function domainItems() {
             return _.filter(self.cartItems(), function (item) {
-                return _.contains(self.domainCategories, item.category);
+                var i = _.intersection(self.domainCategories, item.categories);
+
+                return i.length > 0;
             });
         };
 
@@ -201,9 +232,7 @@ Atomia.ViewModels = Atomia.ViewModels || {};
 
         /** Distinct categories of items in cart. */
         self.categories = function categories() {
-            return _.uniq(_.map(self.cartItems(), function (item) {
-                return item.category;
-            }));
+            return _.union.apply(_, _.pluck(self.cartItems(), 'categories'));
         };
 
         /** Check if cart contains item that 'equals' 'item'. */
@@ -235,7 +264,7 @@ Atomia.ViewModels = Atomia.ViewModels || {};
             // Placeholder values if item is added in view where template of cart use bindings on any
             // of these properties. They will be quickly replaced when the real CartItem from recalculate
             // replaces the temporary local value.
-            item.category = item.category || '';
+            item.categories = item.categories || [];
             item.discount = item.discount || '';
             item.total = item.total || '';
             item.quantity = item.quantity || 1;
@@ -382,6 +411,89 @@ Atomia.ViewModels = Atomia.ViewModels || {};
                 utils.publish('cart:removeCampaignCode');
             });
         };
+
+        /** Manually trigger recalculate */
+        self.recalculate = function recalculate() {
+            cartApi.recalculateCart(toCartApiData(self), function (result) {
+                updateCart(self, result.Cart);
+            });
+        };
+
+        self.addAttr = function addAttr(name, value, recalculate) {
+            if (!_.isString(name) || name === '') {
+                throw new Error('name must be a non-empty string.');
+            }
+
+            if (!_.isString(value) || value === '') {
+                throw new Error('value must be a non-empty string.');
+            }
+
+            if (recalculate === undefined) {
+                recalculate = true;
+            }
+
+            self.attrs.push({ name: name, value: value });
+
+            if (recalculate === true) {
+                cartApi.recalculateCart(toCartApiData(self), function (result) {
+                    updateCart(self, result.Cart);
+
+                    utils.publish('cart:addAttr', { name: name, value: value });
+                });
+            }
+        };
+
+        self.removeAttr = function removeAttr(name, value, recalculate) {
+            if (!_.isString(name) || name === '') {
+                throw new Error('name must be a non-empty string.');
+            }
+
+            if (!_.isString(value) || value === '') {
+                throw new Error('value must be a non-empty string.');
+            }
+
+            if (recalculate === undefined) {
+                recalculate = true;
+            }
+
+            self.attrs.remove(function (attr) {
+                return name === self._origAttrNames[attr.name] && value === attr.value;
+            });
+
+            if (recalculate === true) {
+                cartApi.recalculateCart(toCartApiData(self), function (result) {
+                    updateCart(self, result.Cart);
+
+                    utils.publish('cart:removeAttr', { name: name, value: value });
+                });
+            }
+        };
+
+        self.addUpdateAttr = function (name, value, recalculate) {
+            if (!_.isString(name) || name === '') {
+                throw new Error('name must be a non-empty string.');
+            }
+
+            if (!_.isString(value) || value === '') {
+                throw new Error('value must be a non-empty string.');
+            }
+
+            if (recalculate === undefined) {
+                recalculate = true;
+            }
+
+            self.attrs.remove(function (attr) {
+                return name === self._origAttrNames[attr.name];
+            });
+            self.attrs.push({ name: name, value: value });
+
+            if (recalculate === true) {
+                cartApi.recalculateCart(toCartApiData(self), function (result) {
+                    updateCart(self, result.Cart);
+                    utils.publish('cart:addUpdateAttr', { name: name, value: value });
+                });
+            }
+        };
     }
 
     /** 
@@ -417,7 +529,7 @@ Atomia.ViewModels = Atomia.ViewModels || {};
             },
 
             isDomainItem: function isDomainItem() {
-                return _.contains(cart.domainCategories, item.category);
+                return _.intersection(cart.domainCategories, item.categories).length > 0;
             }
         };
 

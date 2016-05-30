@@ -39,8 +39,12 @@ namespace Atomia.Store.AspNetMvc.Controllers
                 var cart = cartProvider.GetCart();
 
                 cart.Clear();
+                foreach (var attr in updatedCart.CustomAttributes)
+                {
+                    cart.SetCustomAttribute(attr.Name, attr.Value);
+                }
                 cart.UpdateCart(updatedCart.CartItems.Select(ci => ci.CartItem), updatedCart.CampaignCode);
-                
+
                 return JsonEnvelope.Success(new {
                     Cart = new CartModel(cart)
                 });

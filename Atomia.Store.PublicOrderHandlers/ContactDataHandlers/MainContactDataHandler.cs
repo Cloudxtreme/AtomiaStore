@@ -1,7 +1,9 @@
 ﻿using Atomia.Common;
+using Atomia.Common.Configuration;
 using Atomia.Store.AspNetMvc.Models;
 using Atomia.Store.PublicBillingApi.Handlers;
 using Atomia.Web.Plugin.OrderServiceReferences.AtomiaBillingPublicService;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Atomia.Store.PublicOrderHandlers.ContactDataHandlers
@@ -35,15 +37,22 @@ namespace Atomia.Store.PublicOrderHandlers.ContactDataHandlers
             var phone = FormattingHelper.FormatPhoneNumber(mainContact.Phone, mainContact.Country);
             order.Phone = Normalize(phone);
 
-            if (mainContact.IndividualInfo != null)
+            if (mainContact.CustomerType == "individual" && mainContact.IndividualInfo != null)
             {
                 order.CompanyNumber = Normalize(mainContact.IndividualInfo.IdentityNumber);
             }
-            else if (mainContact.CompanyInfo != null)
+            else if (mainContact.CustomerType == "company" && mainContact.CompanyInfo != null)
             {
                 order.Company = Normalize(mainContact.CompanyInfo.CompanyName);
                 order.CompanyNumber = Normalize(mainContact.CompanyInfo.IdentityNumber);
                 order.LegalNumber = Normalize(mainContact.CompanyInfo.VatNumber);
+            }
+
+            if (AtomiaCommon.Instance.SeparateUsernameAndEmail)
+            {
+                var customAttributes = new List<PublicOrderCustomData>(order.CustomData);
+                customAttributes.Add(new PublicOrderCustomData { Name = "Username", Value = Normalize(mainContact.Username) });
+                order.CustomData = customAttributes.ToArray();
             }
 
             return order;

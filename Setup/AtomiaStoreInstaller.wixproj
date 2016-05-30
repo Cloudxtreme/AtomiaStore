@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
-    <ProductVersion>4.5.2</ProductVersion>
+    <ProductVersion>4.6.1</ProductVersion>
     <ProjectGuid>{d0c65ab6-a0a2-4283-b480-74456e51a4eb}</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
     <OutputName>AtomiaStoreInstaller</OutputName>
@@ -26,9 +26,12 @@
   <PropertyGroup>
     <VersionAssembly>..\Atomia.Store.Themes.Default\bin\Atomia.Store.Core.dll</VersionAssembly>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="Product.wxs" />
-  </ItemGroup>
+  <PropertyGroup>
+    <EnableProjectHarvesting>True</EnableProjectHarvesting>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+  </PropertyGroup>
   <ItemGroup>
     <HarvestDirectory Include="publish">
       <ComponentGroupName>Store</ComponentGroupName>
@@ -54,6 +57,9 @@
   <ItemGroup>
     <Content Include="PostPublish.bat" />
     <Content Include="web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Product.wxs" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--

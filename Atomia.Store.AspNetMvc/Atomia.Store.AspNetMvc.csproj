@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Atomia.Store.AspNetMvc</RootNamespace>
     <AssemblyName>Atomia.Store.AspNetMvc</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -108,14 +108,24 @@
     <Compile Include="Adapters\CurrencyFormatter.cs" />
     <Compile Include="Adapters\CurrencyPreferenceProvider.cs" />
     <Compile Include="Adapters\CustomerTypeProvider.cs" />
+    <Compile Include="Adapters\VatDataProvider.cs" />
+    <Compile Include="Controllers\SelectController.cs" />
+    <Compile Include="Controllers\VpsSliderController.cs" />
     <Compile Include="Filters\ThemeFilter.cs" />
     <Compile Include="Infrastructure\GlobalOrderFlows.cs" />
     <Compile Include="Infrastructure\OrderFlow.cs" />
     <Compile Include="Infrastructure\OrderFlowCollection.cs" />
     <Compile Include="Infrastructure\OrderFlowStep.cs" />
     <Compile Include="Infrastructure\RouteCollectionExtension.cs" />
+    <Compile Include="Models\CounterRangeModel.cs" />
+    <Compile Include="Models\CounterTypeModel.cs" />
     <Compile Include="Models\OrderFlowModel.cs" />
+    <Compile Include="Models\SelectAttrsModel.cs" />
+    <Compile Include="Models\SelectItemModel.cs" />
+    <Compile Include="Models\SelectMultiModel.cs" />
+    <Compile Include="Models\SelectSingleModel.cs" />
     <Compile Include="Models\TaxModel.cs" />
+    <Compile Include="Models\VpsSliderModel.cs" />
     <Compile Include="Models\WhoisContactModel.cs" />
     <Compile Include="Ports\IOrderFlowValidator.cs" />
     <Compile Include="Adapters\ItemPresenter.cs" />

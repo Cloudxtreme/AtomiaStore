@@ -1,0 +1,687 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddToCart" xml:space="preserve">
+    <value>Lägg till</value>
+  </data>
+  <data name="AvailablePackages" xml:space="preserve">
+    <value>Tillgängliga paket</value>
+  </data>
+  <data name="Domain" xml:space="preserve">
+    <value>Domän</value>
+  </data>
+  <data name="DomainAvailableHoverTitle" xml:space="preserve">
+    <value>är ledig.</value>
+  </data>
+  <data name="DomainNotAvailableHoverTitle" xml:space="preserve">
+    <value>är inte ledig.</value>
+  </data>
+  <data name="DomainRegistrationDescription" xml:space="preserve">
+    <value>Börja med att välja ett domännamn för ditt hostingpaket.</value>
+  </data>
+  <data name="DomainRegistrationResultsHeading" xml:space="preserve">
+    <value>Resultat för</value>
+  </data>
+  <data name="Fee" xml:space="preserve">
+    <value>Pris</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>Från</value>
+  </data>
+  <data name="HostingPackageDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="HostingPackageTitle" xml:space="preserve">
+    <value>Välj ditt hostingpaket</value>
+  </data>
+  <data name="Item" xml:space="preserve">
+    <value>Produkt</value>
+  </data>
+  <data name="ConnectedDomain" xml:space="preserve">
+    <value>Kopplad domän</value>
+  </data>
+  <data name="MONTH" xml:space="preserve">
+    <value>månad</value>
+    <comment>Renewal period unit convention</comment>
+  </data>
+  <data name="MONTHPlural" xml:space="preserve">
+    <value>månader</value>
+    <comment>Renewal period unit convention</comment>
+  </data>
+  <data name="MoreResults" xml:space="preserve">
+    <value>Fler resultat</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Nästa</value>
+  </data>
+  <data name="OrderPageTitle" xml:space="preserve">
+    <value>Beställ hosting och DNS</value>
+  </data>
+  <data name="PricingVariantDisplay" xml:space="preserve">
+    <value>{1} {2} - {0}</value>
+    <comment>0 = price, 1 = period, 2 = unit</comment>
+  </data>
+  <data name="PricingVariantUBPDisplay" xml:space="preserve">
+    <value>{0} (från {1} till {2} {3}) - {4}</value>
+    <comment>0 = range name, 1 = counter from, 2 = counter to, 3 = unit name, 4 = price</comment>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Ta bort</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Välj</value>
+  </data>
+  <data name="ShoppingCart" xml:space="preserve">
+    <value>Kundvagn</value>
+  </data>
+  <data name="ShoppingCartDescription" xml:space="preserve">
+    <value>Du kan ta bort produkter från kundvagnen.</value>
+  </data>
+  <data name="ShoppingCartEmpty" xml:space="preserve">
+    <value>Kundvagnen är tom.</value>
+  </data>
+  <data name="Subtotal" xml:space="preserve">
+    <value>Subtotal</value>
+  </data>
+  <data name="Taken" xml:space="preserve">
+    <value>Upptagen</value>
+  </data>
+  <data name="Tax" xml:space="preserve">
+    <value>Moms</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Totalt</value>
+  </data>
+  <data name="YEAR" xml:space="preserve">
+    <value>år</value>
+    <comment>Renewal period unit convention</comment>
+  </data>
+  <data name="YEARPlural" xml:space="preserve">
+    <value>år</value>
+    <comment>Renewal period unit convention</comment>
+  </data>
+  <data name="RenewalPeriodDisplay" xml:space="preserve">
+    <value>{0} {1}</value>
+    <comment>0 = period, 1 = unit</comment>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Tillbaka</value>
+  </data>
+  <data name="ConnectedDomainDescription" xml:space="preserve">
+    <value>Vi kommer att ställa in tjänsterna i ditt paket att använda den valda domänen.</value>
+  </data>
+  <data name="StepDescriptionAccount" xml:space="preserve">
+    <value>Lägg till användarinfo</value>
+    <comment>Order flow step resource convention</comment>
+  </data>
+  <data name="StepTitleAccount" xml:space="preserve">
+    <value>Användare</value>
+    <comment>Order flow step resource convention</comment>
+  </data>
+  <data name="StepDescriptionCheckout" xml:space="preserve">
+    <value>Faktura och betalning</value>
+    <comment>Order flow step resource convention</comment>
+  </data>
+  <data name="StepTitleCheckout" xml:space="preserve">
+    <value>Beställ</value>
+    <comment>Order flow step resource convention</comment>
+  </data>
+  <data name="StepDescriptionDomains" xml:space="preserve">
+    <value>Köp ny eller flytta befintlig</value>
+    <comment>Order flow step resource convention</comment>
+  </data>
+  <data name="StepTitleDomains" xml:space="preserve">
+    <value>Domäner</value>
+    <comment>Order flow step resource convention</comment>
+  </data>
+  <data name="StepDescriptionHostingPackage" xml:space="preserve">
+    <value>Välj hostingpaket</value>
+    <comment>Order flow step resource convention</comment>
+  </data>
+  <data name="StepTitleHostingPackage" xml:space="preserve">
+    <value>Hosting</value>
+    <comment>Order flow step resource convention</comment>
+  </data>
+  <data name="LanguageSelectorTitle" xml:space="preserve">
+    <value>Språk</value>
+  </data>
+  <data name="AccountTitle" xml:space="preserve">
+    <value>Kontaktinformation</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Adress</value>
+  </data>
+  <data name="Address2" xml:space="preserve">
+    <value>Adress 2</value>
+  </data>
+  <data name="BillingAddressTitle" xml:space="preserve">
+    <value>Faktureringsadress</value>
+  </data>
+  <data name="BillingDifferentThanMain" xml:space="preserve">
+    <value>Annan faktureringsadress</value>
+  </data>
+  <data name="BillingSameAsMain" xml:space="preserve">
+    <value>Samma som kontaktinformation</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Ändra</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Stad</value>
+  </data>
+  <data name="CompanyName" xml:space="preserve">
+    <value>Företagsnamn</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Land</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>Email är ett krav.</value>
+  </data>
+  <data name="Fax" xml:space="preserve">
+    <value>Fax</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Förnamn</value>
+  </data>
+  <data name="IndividualIdentityNumber" xml:space="preserve">
+    <value>Personnummer</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Efternamn</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>Mobil</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="Zip" xml:space="preserve">
+    <value>Postnummer</value>
+  </data>
+  <data name="VatNumber" xml:space="preserve">
+    <value>Momsregistreringsnummer</value>
+  </data>
+  <data name="CompanyIdentityNumber" xml:space="preserve">
+    <value>Organisationsnummer</value>
+  </data>
+  <data name="CustomerType" xml:space="preserve">
+    <value>Kundtyp</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>Företag</value>
+  </data>
+  <data name="Individual" xml:space="preserve">
+    <value>Privatperson</value>
+  </data>
+  <data name="Checkout" xml:space="preserve">
+    <value>Beställ</value>
+  </data>
+  <data name="PaymentOptions" xml:space="preserve">
+    <value>Betalningsalternativ</value>
+  </data>
+  <data name="AddCampaignCode" xml:space="preserve">
+    <value>Lägg till kampanjkod</value>
+  </data>
+  <data name="Terms" xml:space="preserve">
+    <value>Villkor</value>
+  </data>
+  <data name="ReadAndAgree" xml:space="preserve">
+    <value>Läs och godkänn</value>
+    <comment>Used together with terms of service *_Name strings</comment>
+  </data>
+  <data name="PayUsing" xml:space="preserve">
+    <value>Betala med</value>
+  </data>
+  <data name="PayPalDescription" xml:space="preserve">
+    <value>När du klickar beställ kommer du att skickas vidare till PayPal för att fylla i dina användar- eller kreditkortsuppgifter och blir sen skickad tillbaka hit för att avsluta transaktionen.</value>
+  </data>
+  <data name="PayPalName" xml:space="preserve">
+    <value>PayPal</value>
+  </data>
+  <data name="PayWithInvoiceName" xml:space="preserve">
+    <value>Faktura</value>
+  </data>
+  <data name="InvoiceByPostName" xml:space="preserve">
+    <value>Post</value>
+  </data>
+  <data name="AmountToPay" xml:space="preserve">
+    <value>Summa att betala</value>
+  </data>
+  <data name="Discount" xml:space="preserve">
+    <value>Rabatt</value>
+  </data>
+  <data name="Period" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="Product" xml:space="preserve">
+    <value>Produkt</value>
+  </data>
+  <data name="CheckoutCartIsEmptyDescription" xml:space="preserve">
+    <value>Gå tillbaka och lägg något i kundvagnen innan du går till kassan</value>
+  </data>
+  <data name="CheckoutCartIsEmptyTitle" xml:space="preserve">
+    <value>Din varukorg är tom</value>
+  </data>
+  <data name="defaultTOS_Name" xml:space="preserve">
+    <value>Avtalsvillkor</value>
+    <comment>Terms of service resource convention</comment>
+  </data>
+  <data name="defaultTOS_Terms" xml:space="preserve">
+    <value>Det här är en platshållare för företagets Avtalsvillkor</value>
+    <comment>Terms of service resource convention</comment>
+  </data>
+  <data name="Invoice" xml:space="preserve">
+    <value>Faktura</value>
+  </data>
+  <data name="TOS_core_Name" xml:space="preserve">
+    <value>COREs avtalsvillkor</value>
+    <comment>Terms of service resource convention</comment>
+  </data>
+  <data name="TOS_core_Terms" xml:space="preserve">
+    <value>Det här är en platshållare för företagets avtalsvillkor</value>
+    <comment>Terms of service resource convention</comment>
+  </data>
+  <data name="TOS_se_Name" xml:space="preserve">
+    <value>Avtalsvillkor för .SE-domännamn</value>
+    <comment>Terms of service resource convention</comment>
+  </data>
+  <data name="TOS_se_Terms" xml:space="preserve">
+    <value>Det här är en platshållare för företagets avtalsvillkor</value>
+    <comment>Terms of service resource convention</comment>
+  </data>
+  <data name="CheckoutFailureDescription" xml:space="preserve">
+    <value>&lt;p&gt;Prova att använda ett annat betalsätt. &lt;/p&gt;
+&lt;p&gt;Domännamn kommer att registreras när betalningen har verifierats.&lt;/p&gt;</value>
+  </data>
+  <data name="CheckoutFailureTitle" xml:space="preserve">
+    <value>Betalningen accepterades inte</value>
+  </data>
+  <data name="CheckoutSuccessDescription" xml:space="preserve">
+    <value>&lt;p&gt;Ditt konto kommer att skapas direkt.&lt;/p&gt;
+      	&lt;p&gt;Instruktioner för inloggning har skickats till din emailadress.&lt;/p&gt;</value>
+  </data>
+  <data name="CheckoutSuccessTitle" xml:space="preserve">
+    <value>Tack, och välkommen!</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Försök igen</value>
+  </data>
+  <data name="DE_name" xml:space="preserve">
+    <value>Tyska</value>
+    <comment>Language resource convention</comment>
+  </data>
+  <data name="DE_shortname" xml:space="preserve">
+    <value>DE</value>
+    <comment>Language resource convention</comment>
+  </data>
+  <data name="EN_name" xml:space="preserve">
+    <value>Engelska</value>
+    <comment>Language resource convention</comment>
+  </data>
+  <data name="EN_shortname" xml:space="preserve">
+    <value>EN</value>
+    <comment>Language resource convention</comment>
+  </data>
+  <data name="FR_name" xml:space="preserve">
+    <value>Franska</value>
+    <comment>Language resource convention</comment>
+  </data>
+  <data name="FR_shortname" xml:space="preserve">
+    <value>FR</value>
+    <comment>Language resource convention</comment>
+  </data>
+  <data name="SV_SE_name" xml:space="preserve">
+    <value>Svenska</value>
+    <comment>Language resource convention</comment>
+  </data>
+  <data name="SV_SE_shortname" xml:space="preserve">
+    <value>SE</value>
+    <comment>Language resource convention</comment>
+  </data>
+  <data name="DomainRegistrationNoResultsHeading" xml:space="preserve">
+    <value>Inga resultat för</value>
+  </data>
+  <data name="InvoiceByEmailName" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="SendInvoiceVia" xml:space="preserve">
+    <value>Skicka faktura via</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Avbryt</value>
+  </data>
+  <data name="ChargedAmount" xml:space="preserve">
+    <value>Debiterat belopp</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="PayPalConfirmDescription" xml:space="preserve">
+    <value>&lt;p&gt;Vi är redo att ta emot din order. Se över din order och klicka på Beställ för att avsluta transaktionen. &lt;/p&gt;
+&lt;p&gt;Din order kommer att behandlas på ett säkert sätt av PayPal.&lt;/p&gt;</value>
+  </data>
+  <data name="PayPalConfirmTitle" xml:space="preserve">
+    <value>Bekräftelse PayPal</value>
+  </data>
+  <data name="Error_ForbiddenDescription" xml:space="preserve">
+    <value>Du har inte tillstånd att visa sidan.</value>
+  </data>
+  <data name="Error_ForbiddenTitle" xml:space="preserve">
+    <value>Förbjuden</value>
+  </data>
+  <data name="Error_InternalServerErrorDescription" xml:space="preserve">
+    <value>Ett okänt fel har inträffat. Försök igen senare.</value>
+  </data>
+  <data name="Error_InternalServerErrorTitle" xml:space="preserve">
+    <value>Okänt fel</value>
+  </data>
+  <data name="Error_NotFoundDescription" xml:space="preserve">
+    <value>Sidan du sökte finns inte här.</value>
+  </data>
+  <data name="Error_NotFoundTitle" xml:space="preserve">
+    <value>Ingen sida</value>
+  </data>
+  <data name="AdyenHppDescription" xml:space="preserve">
+    <value>När du klickar beställ kommer du att skickas vidare till Adyen för att fylla i dina kreditkortsuppgifter och blir sen skickad tillbaka hit.</value>
+  </data>
+  <data name="AdyenHppName" xml:space="preserve">
+    <value>Kreditkort</value>
+  </data>
+  <data name="DibsFlexwinDescription" xml:space="preserve">
+    <value>När du klickar beställ kommer du att skickas vidare till DIBS för att fylla i dina kreditkortsuppgifter och blir sen skickad tillbaka hit.</value>
+  </data>
+  <data name="DibsFlexwinName" xml:space="preserve">
+    <value>Kreditkort</value>
+  </data>
+  <data name="PayExRedirectDescription" xml:space="preserve">
+    <value>När du klickar beställ kommer du att skickas vidare till PayEx för att fylla i dina kreditkortsuppgifter och blir sen skickad tillbaka hit.</value>
+  </data>
+  <data name="PayExRedirectName" xml:space="preserve">
+    <value>Kreditkort</value>
+  </data>
+  <data name="WorldPayRedirectDescription" xml:space="preserve">
+    <value>När du klickar beställ kommer du att skickas vidare till Worldpay för att fylla i dina kreditkortsuppgifter och blir sen skickad tillbaka hit.</value>
+  </data>
+  <data name="WorldPayRedirectName" xml:space="preserve">
+    <value>Kreditkort</value>
+  </data>
+  <data name="WorldPayXmlRedirectDescription" xml:space="preserve">
+    <value>När du klickar beställ kommer du att skickas vidare till Wordlpay för att fylla i dina kreditkortsuppgifter och blir sen skickad tillbaka hit.</value>
+  </data>
+  <data name="WorldPayXmlRedirectName" xml:space="preserve">
+    <value>Kreditkort</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Bekräftelse</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Lägg till</value>
+  </data>
+  <data name="CampaignCode" xml:space="preserve">
+    <value>Kampanjkod</value>
+  </data>
+  <data name="CampaignCodeSuccess" xml:space="preserve">
+    <value>Kampanjkod tillagd</value>
+  </data>
+  <data name="AjaxErrorMessage" xml:space="preserve">
+    <value>Ladda om sidan och försök igen</value>
+  </data>
+  <data name="AjaxErrorTitle" xml:space="preserve">
+    <value>Något gick fel</value>
+  </data>
+  <data name="Dismiss" xml:space="preserve">
+    <value>Dismiss</value>
+  </data>
+  <data name="TaxNameDisplay" xml:space="preserve">
+    <value>Moms {0}</value>
+    <comment>0 = formatted percentage, e.g. "25 %"</comment>
+  </data>
+  <data name="NoTax" xml:space="preserve">
+    <value>Ingen moms</value>
+  </data>
+  <data name="CCPaymentName" xml:space="preserve">
+    <value>Kreditkort</value>
+  </data>
+  <data name="CardNumber" xml:space="preserve">
+    <value>Kortnummer</value>
+    <comment>Credit card number label</comment>
+  </data>
+  <data name="CardOwner" xml:space="preserve">
+    <value>Kortinnehavare</value>
+    <comment>Credit card owner label</comment>
+  </data>
+  <data name="CardSecurityCode" xml:space="preserve">
+    <value>CVC/CVV</value>
+    <comment>Credit card security code label</comment>
+  </data>
+  <data name="CreditCardAutoPay" xml:space="preserve">
+    <value>Betala fakturor automatiskt på förfallodagen</value>
+    <comment>Credit card auto pay label</comment>
+  </data>
+  <data name="ErrorCreditCard" xml:space="preserve">
+    <value>Inte ett giltigt kreditkortsnummer</value>
+  </data>
+  <data name="Expires" xml:space="preserve">
+    <value>Giltigt till</value>
+    <comment>Credit card expiration label</comment>
+  </data>
+  <data name="PaymentProfileOptions" xml:space="preserve">
+    <value>Spara betalsätt</value>
+  </data>
+  <data name="SaveCreditCardInfo" xml:space="preserve">
+    <value>Spara min kreditkortsinformation</value>
+    <comment>Credit card save info label</comment>
+  </data>
+  <data name="SelectMonth" xml:space="preserve">
+    <value />
+    <comment>Credit card month expiration options label</comment>
+  </data>
+  <data name="SelectYear" xml:space="preserve">
+    <value />
+    <comment>Credit card year expiration options label</comment>
+  </data>
+  <data name="ErrorEmptyField" xml:space="preserve">
+    <value>Fältet kan inte vara tomt</value>
+  </data>
+  <data name="ErrorExpiresMonthRequired" xml:space="preserve">
+    <value>Du måste välja månad</value>
+  </data>
+  <data name="ErrorExpiresYearRequired" xml:space="preserve">
+    <value>Du måste välja år</value>
+  </data>
+  <data name="ErrorInvalidCardSecurityCode" xml:space="preserve">
+    <value>CVC/CVV måste vara tre eller fyra siffror</value>
+  </data>
+  <data name="ErrorInvalidDomain" xml:space="preserve">
+    <value>Felaktigt domännamn</value>
+  </data>
+  <data name="ErrorTermNotChecked" xml:space="preserve">
+    <value>ErrorTermNotChecked</value>
+  </data>
+  <data name="ErrorUsernameNotAvailable" xml:space="preserve">
+    <value>Användarnamnet är inte tillgängligt.</value>
+  </data>
+  <data name="ExpiresMonth" xml:space="preserve">
+    <value>Giltigt till, månad</value>
+  </data>
+  <data name="ExpiresYear" xml:space="preserve">
+    <value>Giltigt till, år</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Bekräfta</value>
+  </data>
+  <data name="SameAsContactInfo" xml:space="preserve">
+    <value>Samma som kontaktinformation</value>
+  </data>
+  <data name="WhoisAddressTitle" xml:space="preserve">
+    <value>WHOIS-kontakt</value>
+  </data>
+  <data name="WhoisDifferentThanMain" xml:space="preserve">
+    <value>Annan WHOIS-kontakt</value>
+  </data>
+  <data name="WhoisSameAsMain" xml:space="preserve">
+    <value>Samma som kontaktinformation</value>
+  </data>
+  <data name="SkipDomain" xml:space="preserve">
+    <value>Fortsätt utan att lägga till domännamn</value>
+  </data>
+  <data name="DoNotConnectDomain" xml:space="preserve">
+    <value>Koppla inte domän</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Belopp</value>
+  </data>
+  <data name="ErrorPreselectRenewalPeriod" xml:space="preserve">
+    <value>Format för förnyelseperiod är N-MONTH or N-YEAR</value>
+  </data>
+  <data name="CouldNotValidateVatNumber" xml:space="preserve">
+    <value>Kunde inte validera momsregistreringsnummer</value>
+  </data>
+  <data name="InvalidVatNumber" xml:space="preserve">
+    <value>Felaktigt momsregistreringsnummer</value>
+  </data>
+  <data name="NoVatNumber" xml:space="preserve">
+    <value>Kunden har inget momsregistreringsnummer</value>
+  </data>
+  <data name="VatNumberWarning" xml:space="preserve">
+    <value>Ditt momsregisteringsnummer är inte giltigt, eller så är valideringstjästen inte tillgänglig för tillfället. Därför kommer moms att läggas på din faktura. Kontrollera ditt momsregistreringsnummer och försök att validera det igen.</value>
+  </data>
+  <data name="VatValidationSuccessTitle" xml:space="preserve">
+    <value>Momsregistreringsnummer giltigt.</value>
+  </data>
+  <data name="VatValidationSucessDescription" xml:space="preserve">
+    <value>Ditt momsregistreringsnummer är giltigt och din faktura kommer inte att ha moms tillagd.</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Försök igen</value>
+  </data>
+  <data name="Validating" xml:space="preserve">
+    <value>Validerar</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Användarnamn</value>
+  </data>
+  <data name="FindDomain" xml:space="preserve">
+    <value>Sök domän</value>
+  </data>
+</root>

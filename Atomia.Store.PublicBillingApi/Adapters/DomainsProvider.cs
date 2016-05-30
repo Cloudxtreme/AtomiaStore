@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using ApiProduct = Atomia.Web.Plugin.ProductsProvider.Product;
 
 namespace Atomia.Store.PublicBillingApi.Adapters
 {
@@ -15,10 +16,12 @@ namespace Atomia.Store.PublicBillingApi.Adapters
     /// </summary>
     public sealed class DomainsProvider : PublicBillingApiClient, IDomainsProvider
     {
-        private readonly IProductProvider productProvider;
         private readonly Guid resellerId;
         private readonly string currencyCode;
         private readonly string countryCode;
+        private readonly IList<ApiProduct> tldProducts;
+        private readonly ProductMapper productMapper;
+        private readonly IShopNameProvider shopNameProvider;
 
         /// <summary>
         /// Construct a new instance
@@ -26,8 +29,10 @@ namespace Atomia.Store.PublicBillingApi.Adapters
         public DomainsProvider(
             IResellerDataProvider resellerDataProvider, 
             ICurrencyPreferenceProvider currencyPreferenceProvider, 
-            IProductProvider productProvider, 
-            PublicBillingApiProxy billingApi) : base(billingApi)
+            ApiProductsProvider apiProductsProvider, 
+            ProductMapper productMapper,
+            PublicBillingApiProxy billingApi,
+            IShopNameProvider shopNameProvider) : base(billingApi)
         {
             if (resellerDataProvider == null)
             {
@@ -39,9 +44,19 @@ namespace Atomia.Store.PublicBillingApi.Adapters
                 throw new ArgumentException("currencyPreferenceProvider");
             }
 
-            if (productProvider == null)
+            if (apiProductsProvider == null)
             {
-                throw new ArgumentNullException("productProvider");
+                throw new ArgumentNullException("apiProductsProvider");
+            }
+
+            if (productMapper == null)
+            {
+                throw new ArgumentNullException("productMapper");
+            }
+
+            if (shopNameProvider == null)
+            {
+                throw new ArgumentNullException("shopNameProvider");
             }
 
             var resellerData = resellerDataProvider.GetResellerAccountData();
@@ -49,7 +64,10 @@ namespace Atomia.Store.PublicBillingApi.Adapters
             this.resellerId = resellerData.Id;
             this.countryCode = resellerData.DefaultCountry.Code;
             this.currencyCode = currencyPreferenceProvider.GetCurrentCurrency().Code;
-            this.productProvider = productProvider;
+            this.productMapper = productMapper;
+            this.shopNameProvider = shopNameProvider;
+
+            this.tldProducts = apiProductsProvider.GetProductsByCategories(new List<string> { "TLD" });
         }
 
         /// <summary>
@@ -79,7 +97,7 @@ namespace Atomia.Store.PublicBillingApi.Adapters
             {
                 FinishSearch = !results.Any(r => r.Status == DomainResult.LOADING),
                 DomainSearchId = domainSearchId,
-                Results = results.OrderBy(d => d.TLD)
+                Results = results
             };
 
             return data;
@@ -97,6 +115,7 @@ namespace Atomia.Store.PublicBillingApi.Adapters
                 BillingApi.Service,
                 Guid.Empty,
                 resellerId,
+                this.shopNameProvider.GetShopName(),
                 currencyCode,
                 countryCode);
             
@@ -116,7 +135,7 @@ namespace Atomia.Store.PublicBillingApi.Adapters
             {
                 DomainSearchId = transactionId,
                 FinishSearch = statusData.FinishSearch,
-                Results = results.OrderBy(d => d.TLD)
+                Results = results
             };
 
             return data;
@@ -136,7 +155,12 @@ namespace Atomia.Store.PublicBillingApi.Adapters
         private IEnumerable<string> GetDomainNames(ICollection<string> searchTerms)
         {
             var domainsArray = String.Join(" ", searchTerms);
-            var domainsForCheck = DomainSearchHelper.GetDomainsForCheck(domainsArray, this.resellerId);
+            var domainsForCheck = DomainSearchHelper.GetDomainsForCheck(
+                domainsArray,
+                this.resellerId,
+                Guid.Empty,
+                this.shopNameProvider.GetShopName(),
+                this.countryCode);
 
             return domainsForCheck;
         }
@@ -149,7 +173,10 @@ namespace Atomia.Store.PublicBillingApi.Adapters
             var results = new List<DomainDataFromXml>();
             var localStatusString = String.Empty;
             var domainCheckAttributes = BillingApi.CheckDomains(domains);
-            var tldBasedRegexStrings = DomainSearchHelper.GetTLDBasedRegexes(this.resellerId);
+            var tldBasedRegexStrings = DomainSearchHelper.GetTLDBasedRegexes(
+                this.resellerId,
+                this.shopNameProvider.GetShopName(),
+                this.countryCode);
             IEnumerable<Regex> tldBasedRegexes = null;
 
             if (tldBasedRegexStrings.Count > 0)
@@ -181,6 +208,7 @@ namespace Atomia.Store.PublicBillingApi.Adapters
                     BillingApi.Service,
                     Guid.Empty,
                     this.resellerId,
+                    this.shopNameProvider.GetShopName(),
                     this.currencyCode,
                     this.countryCode).ToList();
 
@@ -222,6 +250,7 @@ namespace Atomia.Store.PublicBillingApi.Adapters
                 BillingApi.Service,
                 Guid.Empty,
                 this.resellerId,
+                this.shopNameProvider.GetShopName(),
                 this.currencyCode,
                 this.countryCode);
 
@@ -238,7 +267,18 @@ namespace Atomia.Store.PublicBillingApi.Adapters
         /// <returns>Single domain result</returns>
         private DomainResult CreateDomainResult(string productId, string productStatus, string productName, int transactionId)
         {
-            var product = productProvider.GetProduct(productId);
+            var apiProduct = this.tldProducts.FirstOrDefault(p => p.ArticleNumber == productId);
+            if (apiProduct == null)
+            {
+                throw new InvalidOperationException(string.Format("No TLD product with articlenumber {0}", productId));
+            }
+
+            string productvalue;
+            if (!apiProduct.Properties.TryGetValue("productvalue", out productvalue))
+            {
+                throw new InvalidOperationException(String.Format("product {0} is missing required 'productvalue' property", productId));
+            }
+
             var status = DomainResult.UNKNOWN;
 
             switch (productStatus.ToLower())
@@ -248,6 +288,7 @@ namespace Atomia.Store.PublicBillingApi.Adapters
                     status = DomainResult.LOADING;
                     break;
                 case ("taken"):
+                case ("unavailable"):
                 case ("special"):
                     status = DomainResult.UNAVAILABLE;
                     break;
@@ -260,16 +301,14 @@ namespace Atomia.Store.PublicBillingApi.Adapters
                     break;
             }
 
-            var tldAttr = product.CustomAttributes.FirstOrDefault(ca => ca.Name == "productvalue");
-
-            if (tldAttr == null)
-            {
-                throw new InvalidOperationException(String.Format("product {0} is missing required 'productvalue' custom attribute", product.ArticleNumber));
-            }
-
-            var tld = tldAttr.Value.ToLower().TrimStart('.');
+            var product = productMapper.Map(apiProduct);
+            var tld = productvalue.ToLower().TrimStart('.');
 
             var domainResult = new DomainResult(product, tld, productName, status, transactionId);
+
+            // This makes sure results get the same Order property independent of if they are from initial search or status check.
+            // Since tldProducts come directly from API they are sorted in that order.
+            domainResult.Order = tldProducts.IndexOf(apiProduct);
 
             return domainResult;
         }
